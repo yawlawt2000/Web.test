@@ -5,104 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Server Status</title>
 
-<!-- Myanmar Unicode Font -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+:root {
+    --bg-main: radial-gradient(circle at top, #001a12, #000);
+    --text-main: #eafff4;
+    --card-bg: rgba(0, 255, 153, 0.06);
+    --card-border: rgba(0, 255, 153, 0.5);
+    --btn-bg: linear-gradient(90deg, #00ff88, #66ffd6);
+    --btn-text: #002014;
+}
 
-    body {
-        margin: 0;
-        font-family: 'Noto Sans Myanmar', Arial, sans-serif;
-        background: radial-gradient(circle at top, #001a12, #000);
-        color: #eafff4;
-        min-height: 100vh;
-    }
+body.light {
+    --bg-main: linear-gradient(180deg, #f4fff9, #e6f7ef);
+    --text-main: #002014;
+    --card-bg: #ffffff;
+    --card-border: #00cc88;
+    --btn-bg: linear-gradient(90deg, #00cc88, #33ddb3);
+    --btn-text: #ffffff;
+}
 
-    .container {
-        max-width: 420px;
-        margin: auto;
-        padding: 20px 16px 40px;
-        text-align: center;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    .logo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        margin: 30px auto 20px;
-        background: linear-gradient(145deg, #00ff99, #006644);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        font-weight: 700;
-        color: #001a10;
-        box-shadow: 0 0 25px #00ff99, inset 0 0 15px rgba(255,255,255,0.3);
-    }
+body {
+    margin: 0;
+    font-family: 'Noto Sans Myanmar', Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    transition: 0.3s;
+}
 
-    .status {
-        font-size: 26px;
-        font-weight: 700;
-        color: #00ff88;
-        text-shadow: 0 0 10px #00ff88;
-        margin-bottom: 4px;
-    }
+.container {
+    max-width: 420px;
+    margin: auto;
+    padding: 20px 16px 40px;
+    text-align: center;
+}
 
-    .active {
-        font-size: 14px;
-        color: #9affc7;
-        margin-bottom: 28px;
-        letter-spacing: 1px;
-    }
+.toggle {
+    text-align: right;
+}
 
-    .card {
-        background: rgba(0, 255, 153, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1.5px solid rgba(0, 255, 153, 0.5);
-        border-radius: 18px;
-        padding: 16px;
-        margin-bottom: 18px;
-        box-shadow: 0 0 18px rgba(0, 255, 153, 0.35);
-    }
+.toggle button {
+    background: none;
+    border: 1px solid #00ff99;
+    color: inherit;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+}
 
-    .card-title {
-        font-size: 17px;
-        font-weight: 600;
-        margin-bottom: 14px;
-        color: #ffd6ff;
-    }
+.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    background: linear-gradient(145deg, #00ff99, #006644);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: #001a10;
+    box-shadow: 0 0 25px #00ff99;
+}
 
-    .btn {
-        width: 100%;
-        padding: 14px;
-        border-radius: 999px;
-        background: linear-gradient(90deg, #00ff88, #66ffd6);
-        color: #002014;
-        font-size: 15px;
-        font-weight: 700;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.7);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
+.status {
+    font-size: 26px;
+    font-weight: 700;
+    color: #00ff88;
+    margin-bottom: 4px;
+}
 
-    .btn:hover {
-        box-shadow: 0 0 30px rgba(0, 255, 136, 0.95);
-    }
+.active {
+    font-size: 14px;
+    margin-bottom: 28px;
+}
 
-    .btn:active {
-        transform: scale(0.96);
-    }
+.card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 18px;
+}
 
-    audio {
-        width: 100%;
-        margin-top: 25px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 255, 153, 0.4);
-    }
+.card-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 999px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+audio {
+    width: 100%;
+    margin-top: 25px;
+    border-radius: 12px;
+}
 </style>
 </head>
 
@@ -110,9 +124,11 @@
 
 <div class="container">
 
-    <div class="logo">
-        Yt<br>Plus
+    <div class="toggle">
+        <button onclick="toggleMode()">🌙 / ☀️</button>
     </div>
+
+    <div class="logo">Yt<br>Plus</div>
 
     <div class="status">SERVER IS RUNNING</div>
     <div class="active">| Status: Active</div>
@@ -165,7 +181,7 @@
             COPY UDP Key
         </button>
     </div>
-
+    
     <audio controls>
         <source src="https://codeberg.org/yawyaw/Yaw/raw/branch/main/Mlai-Nnga-Hkra.mp3" type="audio/mpeg">
     </audio>
@@ -175,7 +191,11 @@
 <script>
 function copyText(text) {
     navigator.clipboard.writeText(text);
-    alert("Copied: " + text);
+    alert("Copied!");
+}
+
+function toggleMode() {
+    document.body.classList.toggle("light");
 }
 </script>
 
